@@ -1,0 +1,38 @@
+
+from abc import ABC,abstractmethod
+
+class VLC_Player:
+    def play_vlc(self,audio_type,filename):
+        print(f"The {audio_type} is Playing: {filename}")
+
+
+class MediaPlayer(ABC):
+    @abstractmethod
+    def play(self,audio_type,filename):
+        pass
+
+
+class MediaAdapter(MediaPlayer):
+    def __init__(self):
+        self.vlc = VLC_Player()
+
+    def play(self,audio_type,filename):
+        self.vlc.play_vlc(audio_type,filename)
+
+
+class AudioPlayer(MediaPlayer):
+    def __init__(self):
+        self.adapter = MediaAdapter()
+
+    def play(self,audio_type,filename):
+        if audio_type == "mp3":
+            print(f"The {audio_type} is playing : {filename}")
+        else:
+            self.adapter.play(audio_type,filename)
+
+
+music = AudioPlayer()
+music.play("mp3","mp3.song")
+music.play("vlc","vlc.song")
+
+
