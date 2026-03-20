@@ -4,6 +4,10 @@ This repository contains a small Python example of the Adapter design pattern.
 It shows how an `AudioPlayer` can expose a single `play()` interface while using
 an adapter to work with a different player implementation for unsupported formats.
 
+## Concept: The Adapter Pattern
+
+The **Adapter Pattern** is a structural design pattern that allows objects with incompatible interfaces to collaborate. It acts as a bridge between two incompatible interfaces by wrapping the legacy or incompatible code in an object that implements the target interface, making it usable by the client.
+
 ## What This Example Demonstrates
 
 - Defining a common interface with an abstract base class
@@ -13,12 +17,14 @@ an adapter to work with a different player implementation for unsupported format
 
 ## Project Structure
 
+The project is organized by pattern type. Currently, it contains basic adapter implementations:
+
 ```text
 Adapter Practice/
-|- Basic/
-|  |- ObjectAdapter
-|  `- explanation.md
-`- README.md
+├── Basic/
+│   ├── ObjectAdapter    # Example of Object Adapter pattern
+│   └── explanation.md   # Detailed conceptual explanation
+└── README.md            # Project documentation
 ```
 
 ## Code Overview
@@ -32,10 +38,10 @@ The main example is in `Basic/ObjectAdapter`.
 
 ## How It Works
 
-1. `AudioPlayer` receives a request through `play(audio_type, filename)`.
-2. If the format is `mp3`, it handles playback directly.
-3. For other formats like `vlc`, it forwards the request to `MediaAdapter`.
-4. `MediaAdapter` translates the call to `VLC_Player.play_vlc(...)`.
+1. **Target Interface**: The client (`AudioPlayer`) defines a consistent interface (`play()`) that the system expects.
+2. **Client Logic**: If the format is `mp3`, it handles playback directly.
+3. **Delegation**: For unsupported formats like `vlc`, it forwards the request to the `MediaAdapter`.
+4. **Adaptee & Adapter**: The `MediaAdapter` acts as the wrapper (Adapter), translating the request to the incompatible `VLC_Player` (`Adaptee`) interface (`play_vlc()`).
 
 This keeps the client code simple while allowing integration with a class that
 does not follow the same interface.
@@ -45,7 +51,7 @@ does not follow the same interface.
 Make sure Python 3 is installed, then run:
 
 ```bash
-python "Basic/ObjectAdapter"
+python ObjectAdapter
 ```
 
 ## Example Output
